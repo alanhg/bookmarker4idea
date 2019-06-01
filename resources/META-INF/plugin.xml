@@ -1,0 +1,49 @@
+<idea-plugin>
+    <id>com.your.company.unique.plugin.id</id>
+    <name>bookmarker4idea</name>
+    <version>1.0</version>
+    <vendor email="i@alanhe.me" url="https://1991421.cn/">personal</vendor>
+
+    <description>
+        During the period of code reviewing, the meeting host can insert a bookmark and use it to log down the path of
+        that piece of code, which some further changes will be needed later on by other developers.
+    </description>
+
+    <change-notes>
+        - The bookmark should be made to the line of cursor with a shortcut.
+        - Plugin will be shown in the Tool Window.
+        - A pop-up windows with the history of bookmarks will be shown when clicking on the plugin on the tool window
+        - A button to copy from the history to the system's clipboard
+    </change-notes>
+
+    <!-- Plugin version
+         Recommended format is BRANCH.BUILD.FIX (MAJOR.MINOR.FIX)
+         Displayed in the "Plugins" settings dialog and the plugin repository Web interface.  -->
+    <version>0.1.0</version>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <idea-version since-build="173.0"/>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <applicationService serviceImplementation="cn.alanhe.BookMarkService"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+        <action id="bookmark" class="cn.alanhe.BookMark" text="BookMark" description="bookmark">
+            <add-to-group group-id="Bookmarks"/>
+            <!--            <add-to-group group-id="EditorPopupMenu"/>-->
+        </action>
+        <action id="ExportBookMark" class="cn.alanhe.CopyBookMark" text="Copy BookMark to Clipboard"
+                description="Copy BookMark to Clipboard">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+    </actions>
+</idea-plugin>
