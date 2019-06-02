@@ -7,8 +7,10 @@ later on by other developers.
 
 ## Feature V0.1
 + The bookmark should be made to the line of cursor with a shortcut.
++ A button to copy from the history to the system's clipboard
+
+## Next version
 + Plugin will be shown in the Tool Window.
 + A pop-up windows with the history of bookmarks will be shown when clicking on the plugin on the tool window
-+ A button to copy from the history to the system's clipboard
 
 
