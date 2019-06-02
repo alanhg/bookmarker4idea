@@ -26,7 +26,7 @@ public class BookMarkX extends AnAction {
 
         String projectName = e.getProject().getName();
         int currentLineNumber = editor.getCaretModel().getLogicalPosition().line;
-        String currentFilePath = currentFile.getPath();
+        String currentFilePath = currentFile.getCanonicalPath();
         service.addBookMark(new BookmarkXItemState(projectName, currentFilePath, currentLineNumber));
     }
 }

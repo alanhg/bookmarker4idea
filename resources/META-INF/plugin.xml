@@ -10,7 +10,7 @@
     </description>
 
     <change-notes>
-        - The bookmark should be made to the line of cursor with a shortcut Ctrl Command B.
+        - The bookmark should be made to the line of cursor with a shortcut ctrl command B.
         - A button to copy from the history to the system's clipboard
     </change-notes>
 
@@ -34,7 +34,7 @@
         <!-- Add your actions here -->
         <action id="bookmark" class="cn.alanhe.BookMarkX" text="BookMark" description="bookmark">
             <add-to-group group-id="Bookmarks"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="ctrl Command B"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl command B"/>
         </action>
         <action id="ExportBookMark" class="cn.alanhe.CopyBookMarkX" text="Copy BookMark to Clipboard"
                 icon="/icon/bookmarker.png"
