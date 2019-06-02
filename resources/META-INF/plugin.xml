@@ -1,5 +1,5 @@
 <idea-plugin>
-    <id>cn.alanhe.plugin.bookmarker4idea</id>
+    <id>cn.alanhe.plugin.bookmarkx4idea</id>
     <name>bookmarker4idea</name>
     <version>1.0</version>
     <vendor email="i@alanhe.me" url="https://1991421.cn/">personal</vendor>
@@ -10,9 +10,7 @@
     </description>
 
     <change-notes>
-        - The bookmark should be made to the line of cursor with a shortcut.
-        - Plugin will be shown in the Tool Window.
-        - A pop-up windows with the history of bookmarks will be shown when clicking on the plugin on the tool window
+        - The bookmark should be made to the line of cursor with a shortcut F4.
         - A button to copy from the history to the system's clipboard
     </change-notes>
 
@@ -30,15 +28,15 @@
     <depends>com.intellij.modules.lang</depends>
     -->
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="cn.alanhe.BookMarkPersistentStateComponent"/>
+        <applicationService serviceImplementation="cn.alanhe.BookMarkXPersistentStateComponent"/>
     </extensions>
     <actions>
         <!-- Add your actions here -->
-        <action id="bookmark" class="cn.alanhe.BookMark" text="BookMark" description="bookmark">
+        <action id="bookmark" class="cn.alanhe.BookMarkX" text="BookMark" description="bookmark">
             <add-to-group group-id="Bookmarks"/>
-            <!--            <add-to-group group-id="EditorPopupMenu"/>-->
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl Command B"/>
         </action>
-        <action id="ExportBookMark" class="cn.alanhe.CopyBookMark" text="Copy BookMark to Clipboard"
+        <action id="ExportBookMark" class="cn.alanhe.CopyBookMarkX" text="Copy BookMark to Clipboard"
                 icon="/icon/bookmarker.png"
                 description="Copy BookMark to Clipboard">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>

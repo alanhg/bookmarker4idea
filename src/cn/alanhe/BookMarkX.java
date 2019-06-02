@@ -8,7 +8,7 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.vfs.VirtualFile;
 
-public class BookMark extends AnAction {
+public class BookMarkX extends AnAction {
 
 
     @Override
@@ -22,11 +22,11 @@ public class BookMark extends AnAction {
         if (e.getProject() == null || currentFile == null) {
             return;
         }
-        BookMarkPersistentStateComponent service = BookMarkPersistentStateComponent.getInstance();
+        BookMarkXPersistentStateComponent service = BookMarkXPersistentStateComponent.getInstance();
 
         String projectName = e.getProject().getName();
         int currentLineNumber = editor.getCaretModel().getLogicalPosition().line;
         String currentFilePath = currentFile.getPath();
-        service.addBookMark(new BookmarkItemState(projectName, currentFilePath, currentLineNumber));
+        service.addBookMark(new BookmarkXItemState(projectName, currentFilePath, currentLineNumber));
     }
 }
