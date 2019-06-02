@@ -1,8 +1,8 @@
 <idea-plugin>
     <id>cn.alanhe.plugin.bookmarkx4idea</id>
-    <name>bookmarker4idea</name>
+    <name>bookmarkx4idea</name>
     <version>1.0</version>
-    <vendor email="i@alanhe.me" url="https://1991421.cn/">personal</vendor>
+    <vendor email="i@alanhe.me" url="https://github.com/alanhg/bookmarkex4idea">personal</vendor>
 
     <description>
         During the period of code reviewing, the meeting host can insert a bookmark and use it to log down the path of
@@ -24,15 +24,16 @@
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
-    <!-- uncomment to enable plugin in all products
+    <!--     uncomment to enable plugin in all products-->
     <depends>com.intellij.modules.lang</depends>
-    -->
+
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="cn.alanhe.BookMarkXPersistentStateComponent"/>
     </extensions>
+
     <actions>
         <!-- Add your actions here -->
-        <action id="bookmark" class="cn.alanhe.BookMarkX" text="BookMark" description="bookmark">
+        <action id="bookmark" class="cn.alanhe.BookMarkX" text="toggle BookMarkx" description="bookmark">
             <add-to-group group-id="Bookmarks"/>
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl command B"/>
         </action>
