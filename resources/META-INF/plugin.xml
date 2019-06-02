@@ -1,5 +1,5 @@
 <idea-plugin>
-    <id>com.your.company.unique.plugin.id</id>
+    <id>cn.alanhe.plugin.bookmarker4idea</id>
     <name>bookmarker4idea</name>
     <version>1.0</version>
     <vendor email="i@alanhe.me" url="https://1991421.cn/">personal</vendor>
@@ -39,6 +39,7 @@
             <!--            <add-to-group group-id="EditorPopupMenu"/>-->
         </action>
         <action id="ExportBookMark" class="cn.alanhe.CopyBookMark" text="Copy BookMark to Clipboard"
+                icon="/icon/bookmarker.png"
                 description="Copy BookMark to Clipboard">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
         </action>

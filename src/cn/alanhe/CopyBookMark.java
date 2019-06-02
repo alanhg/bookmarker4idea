@@ -13,7 +13,7 @@ public class CopyBookMark extends AnAction {
 
         StringBuilder text = new StringBuilder();
         for (BookmarkItemState state : service.getBookMarks()) {
-            text.append(String.format("【%s】,%s,L%d\n", state.getProjectName(), state.getFilePath(), state.getLineNumebr() + 1));
+            text.append(String.format("【%s】%s,L%d\n", state.getProjectName(), state.getFilePath(), state.getLineNumebr() + 1));
         }
         CopyPasteManager.getInstance().setContents(new TextTransferable(text.toString()));
     }
