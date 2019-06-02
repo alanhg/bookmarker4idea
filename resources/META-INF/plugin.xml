@@ -29,12 +29,9 @@
     <!-- uncomment to enable plugin in all products
     <depends>com.intellij.modules.lang</depends>
     -->
-
     <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
-        <applicationService serviceImplementation="cn.alanhe.BookMarkService"/>
+        <applicationService serviceImplementation="cn.alanhe.BookMarkPersistentStateComponent"/>
     </extensions>
-
     <actions>
         <!-- Add your actions here -->
         <action id="bookmark" class="cn.alanhe.BookMark" text="BookMark" description="bookmark">

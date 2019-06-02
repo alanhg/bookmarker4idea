@@ -3,7 +3,6 @@ package cn.alanhe;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
@@ -23,7 +22,7 @@ public class BookMark extends AnAction {
         if (e.getProject() == null || currentFile == null) {
             return;
         }
-        BookMarkService service = ServiceManager.getService(BookMarkService.class);
+        BookMarkPersistentStateComponent service = BookMarkPersistentStateComponent.getInstance();
 
         String projectName = e.getProject().getName();
         int currentLineNumber = editor.getCaretModel().getLogicalPosition().line;

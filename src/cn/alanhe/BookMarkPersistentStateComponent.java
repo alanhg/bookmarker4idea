@@ -2,9 +2,9 @@ package cn.alanhe;
 
 
 import com.intellij.openapi.components.PersistentStateComponent;
+import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
-import com.intellij.util.xmlb.XmlSerializerUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -12,29 +12,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@State(
-        name = "BookMarkSetting",
-        storages = {@Storage(
-                value = "$APP_CONFIG$/bookmark.xml"
-        )}
-)
-public class BookMarkService implements PersistentStateComponent<BookMarkService> {
+@State(name = "cn.alanhe.BookMarkPersistentStateComponent", storages = {@Storage("bookmarker-setting.xml")})
+public class BookMarkPersistentStateComponent implements PersistentStateComponent<BookMarkPersistentStateComponent> {
 
-    private List<BookmarkItemState> bookmarkItemStates;
-
-    public BookMarkService() {
-        this.bookmarkItemStates = new ArrayList<>();
-    }
+    private List<BookmarkItemState> bookmarkItemStates = new ArrayList<>();
 
     @Nullable
     @Override
-    public BookMarkService getState() {
+    public BookMarkPersistentStateComponent getState() {
         return this;
     }
 
     @Override
-    public void loadState(@NotNull BookMarkService bookMarkServive) {
-        XmlSerializerUtil.copyBean(bookMarkServive, this);
+    public void loadState(@NotNull BookMarkPersistentStateComponent bookMarkServive) {
+        this.bookmarkItemStates = bookMarkServive.bookmarkItemStates;
     }
 
     @Override
@@ -57,4 +48,7 @@ public class BookMarkService implements PersistentStateComponent<BookMarkService
         return this.bookmarkItemStates;
     }
 
+    public static BookMarkPersistentStateComponent getInstance() {
+        return ServiceManager.getService(BookMarkPersistentStateComponent.class);
+    }
 }
