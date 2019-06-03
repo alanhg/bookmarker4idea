@@ -17,7 +17,7 @@
     <!-- Plugin version
          Recommended format is BRANCH.BUILD.FIX (MAJOR.MINOR.FIX)
          Displayed in the "Plugins" settings dialog and the plugin repository Web interface.  -->
-    <version>0.1.0</version>
+    <version>0.2.0</version>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
     <idea-version since-build="173.0"/>
@@ -35,6 +35,7 @@
         <!-- Add your actions here -->
         <action id="bookmark" class="cn.alanhe.BookMarkX" text="toggle BookMarkx" description="bookmark">
             <add-to-group group-id="Bookmarks"/>
+            <add-to-group group-id="LocalHistory"/>
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt B"/>
         </action>
         <action id="ExportBookMark" class="cn.alanhe.CopyBookMarkX" text="Copy BookMark to Clipboard"
