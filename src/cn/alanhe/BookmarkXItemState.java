@@ -7,10 +7,10 @@ public class BookmarkXItemState {
 
     private int lineNumebr;
 
-    public BookmarkXItemState(String projectName, String filePath, int lineNumebr) {
+    public BookmarkXItemState(String projectName, String filePath, int lineNumber) {
         this.projectName = projectName;
         this.filePath = filePath;
-        this.lineNumebr = lineNumebr;
+        this.lineNumebr = lineNumber;
     }
 
     public String getProjectName() {
