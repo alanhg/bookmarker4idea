@@ -1,5 +1,7 @@
 package cn.alanhe;
 
+import java.util.Date;
+
 public class BookmarkXItemState {
     private String projectName;
 
@@ -7,10 +9,13 @@ public class BookmarkXItemState {
 
     private int lineNumebr;
 
-    public BookmarkXItemState(String projectName, String filePath, int lineNumber) {
+    private Date createdDate;
+
+    public BookmarkXItemState(String projectName, String filePath, int lineNumebr, Date createdDate) {
         this.projectName = projectName;
         this.filePath = filePath;
-        this.lineNumebr = lineNumber;
+        this.lineNumebr = lineNumebr;
+        this.createdDate = createdDate;
     }
 
     public String getProjectName() {
@@ -23,5 +28,9 @@ public class BookmarkXItemState {
 
     public int getLineNumebr() {
         return lineNumebr;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
     }
 }

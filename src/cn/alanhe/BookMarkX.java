@@ -8,6 +8,8 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.vfs.VirtualFile;
 
+import java.util.Date;
+
 public class BookMarkX extends AnAction {
 
 
@@ -28,6 +30,6 @@ public class BookMarkX extends AnAction {
         int currentLineNumber = editor.getCaretModel().getLogicalPosition().line;
         String currentFilePath = currentFile.getCanonicalPath().replaceFirst(e.getProject().getBasePath(), "");
 
-        service.addBookMark(new BookmarkXItemState(projectName, currentFilePath, currentLineNumber));
+        service.addBookMark(new BookmarkXItemState(projectName, currentFilePath, currentLineNumber, new Date()));
     }
 }
