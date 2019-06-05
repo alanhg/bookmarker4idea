@@ -1,7 +1,6 @@
 <idea-plugin>
     <id>cn.alanhe.plugin.bookmarkx4idea</id>
     <name>bookmarkx4idea</name>
-    <version>1.0</version>
     <vendor email="i@alanhe.me" url="https://github.com/alanhg/bookmarkex4idea">personal</vendor>
 
     <description>
@@ -17,7 +16,7 @@
     <!-- Plugin version
          Recommended format is BRANCH.BUILD.FIX (MAJOR.MINOR.FIX)
          Displayed in the "Plugins" settings dialog and the plugin repository Web interface.  -->
-    <version>0.2.0</version>
+    <version>0.3.0</version>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
     <idea-version since-build="173.0"/>
@@ -31,13 +30,16 @@
         <applicationService serviceImplementation="cn.alanhe.BookMarkXPersistentStateComponent"/>
     </extensions>
 
+
+    <project-components>
+        <!-- Add your project components here -->
+        <component>
+            <implementation-class>cn.alanhe.BookMarkXProjectComponent</implementation-class>
+        </component>
+    </project-components>
+
     <actions>
         <!-- Add your actions here -->
-        <action id="bookmark" class="cn.alanhe.BookMarkX" text="toggle BookMarkx" description="bookmark">
-            <add-to-group group-id="Bookmarks"/>
-            <add-to-group group-id="LocalHistory"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt B"/>
-        </action>
         <action id="ExportBookMark" class="cn.alanhe.CopyBookMarkX" text="Copy BookMark to Clipboard"
                 icon="/icon/bookmarker.png"
                 description="Copy BookMark to Clipboard">

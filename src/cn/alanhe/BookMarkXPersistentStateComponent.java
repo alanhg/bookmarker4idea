@@ -34,10 +34,13 @@ public class BookMarkXPersistentStateComponent implements PersistentStateCompone
 
     }
 
-
     void addBookMark(BookmarkXItemState bookmarkXItemState) {
         List<BookmarkXItemState> existBookmarks = this.bookmarkXItemStates.stream()
-                .filter(bookmarkXItemState1 -> bookmarkXItemState1.equals(bookmarkXItemState)).collect(Collectors.toList());
+                .filter(bookmarkXItemState1 ->
+                        bookmarkXItemState1.getProjectName().equals(bookmarkXItemState.getProjectName()) &&
+                                bookmarkXItemState1.getFilePath().equals(bookmarkXItemState.getFilePath()) &&
+                                bookmarkXItemState1.getLineNumebr() == (bookmarkXItemState.getLineNumebr()))
+                .collect(Collectors.toList());
         if (existBookmarks.size() > 0) {
             this.bookmarkXItemStates.remove(existBookmarks.get(0));
             return;
