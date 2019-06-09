@@ -18,6 +18,8 @@ public class BookMarkXPersistentStateComponent implements PersistentStateCompone
 
     private List<BookmarkXItemState> bookmarkXItemStates = new ArrayList<>();
 
+    private ViewScopeEnum viewScope = ViewScopeEnum.PROJECT;
+
     @Nullable
     @Override
     public BookMarkXPersistentStateComponent getState() {
@@ -50,6 +52,10 @@ public class BookMarkXPersistentStateComponent implements PersistentStateCompone
 
     public List<BookmarkXItemState> getBookMarks() {
         return this.bookmarkXItemStates;
+    }
+
+    public ViewScopeEnum getViewScope() {
+        return this.viewScope;
     }
 
     public static BookMarkXPersistentStateComponent getInstance() {
