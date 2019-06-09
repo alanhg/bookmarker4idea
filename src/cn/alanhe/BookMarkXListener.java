@@ -1,6 +1,7 @@
 package cn.alanhe;
 
 
+import com.intellij.codeInsight.daemon.OutsidersPsiFileSupport;
 import com.intellij.ide.bookmarks.Bookmark;
 import com.intellij.ide.bookmarks.BookmarksListener;
 import com.intellij.openapi.diagnostic.Logger;
@@ -44,7 +45,7 @@ public class BookMarkXListener implements BookmarksListener {
 
     private void addBookmark(Bookmark b) {
         VirtualFile virtualFile = b.getFile();
-        String path = virtualFile.getPath();
+        String path = OutsidersPsiFileSupport.isOutsiderFile(virtualFile) ? OutsidersPsiFileSupport.getOriginalFilePath(virtualFile) : virtualFile.getPath();
         path = path.replace(project.getBasePath(), "");
         BookMarkXPersistentStateComponent service = BookMarkXPersistentStateComponent.getInstance();
         String projectName = project.getName();
