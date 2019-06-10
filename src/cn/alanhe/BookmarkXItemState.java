@@ -7,15 +7,18 @@ public class BookmarkXItemState {
 
     private String filePath;
 
-    private int lineNumebr;
+    private int lineNumber;
 
     private Date createdDate;
 
-    public BookmarkXItemState(String projectName, String filePath, int lineNumebr, Date createdDate) {
+    private String annotateAuthor;
+
+    public BookmarkXItemState(String projectName, String filePath, int lineNumber, Date createdDate, String annotateAuthor) {
         this.projectName = projectName;
         this.filePath = filePath;
-        this.lineNumebr = lineNumebr;
+        this.lineNumber = lineNumber;
         this.createdDate = createdDate;
+        this.annotateAuthor = annotateAuthor;
     }
 
     public String getProjectName() {
@@ -26,11 +29,15 @@ public class BookmarkXItemState {
         return filePath;
     }
 
-    public int getLineNumebr() {
-        return lineNumebr;
+    public int getLineNumber() {
+        return lineNumber;
     }
 
     public Date getCreatedDate() {
         return createdDate;
+    }
+
+    public String getAnnotateAuthor() {
+        return annotateAuthor;
     }
 }

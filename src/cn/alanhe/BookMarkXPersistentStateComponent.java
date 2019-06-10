@@ -18,7 +18,7 @@ public class BookMarkXPersistentStateComponent implements PersistentStateCompone
 
     private List<BookmarkXItemState> bookmarkXItemStates = new ArrayList<>();
 
-    private ViewScopeEnum viewScope = ViewScopeEnum.PROJECT;
+    private ViewScopeEnum viewScope = ViewScopeEnum.GLOABL;
 
     @Nullable
     @Override
@@ -41,7 +41,7 @@ public class BookMarkXPersistentStateComponent implements PersistentStateCompone
                 .filter(bookmarkXItemState1 ->
                         bookmarkXItemState1.getProjectName().equals(bookmarkXItemState.getProjectName()) &&
                                 bookmarkXItemState1.getFilePath().equals(bookmarkXItemState.getFilePath()) &&
-                                bookmarkXItemState1.getLineNumebr() == (bookmarkXItemState.getLineNumebr()))
+                                bookmarkXItemState1.getLineNumber() == (bookmarkXItemState.getLineNumber()))
                 .collect(Collectors.toList());
         if (existBookmarks.size() > 0) {
             this.bookmarkXItemStates.remove(existBookmarks.get(0));

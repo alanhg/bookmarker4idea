@@ -6,6 +6,7 @@ import com.intellij.openapi.ide.CopyPasteManager;
 import com.intellij.util.ui.TextTransferable;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class CopyBookMarkX extends AnAction {
@@ -18,11 +19,11 @@ public class CopyBookMarkX extends AnAction {
         List<BookmarkXItemState> bookMarks = service.getBookMarks();
         if (ViewScopeEnum.PROJECT.equals(service.getViewScope())) {
             bookMarks = bookMarks.stream()
-                    .filter(bookmarkXItemState -> bookmarkXItemState.getProjectName().equals(e.getProject().getName()))
+                    .filter(bookmarkXItemState -> bookmarkXItemState.getProjectName().equals(Objects.requireNonNull(e.getProject()).getName()))
                     .collect(Collectors.toList());
         }
         for (BookmarkXItemState state : bookMarks) {
-            text.append(String.format("【%s】%s,L%d<br>", state.getProjectName(), state.getFilePath(), state.getLineNumebr() + 1));
+            text.append(String.format("【%s】%s,L%d @%s<br>", state.getProjectName(), state.getFilePath(), state.getLineNumber() + 1, state.getAnnotateAuthor()));
         }
         CopyPasteManager.getInstance().setContents(new TextTransferable(text.toString()));
     }
