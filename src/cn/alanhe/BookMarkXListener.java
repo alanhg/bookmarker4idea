@@ -65,7 +65,7 @@ public class BookMarkXListener implements BookmarksListener {
         BookMarkXPersistentStateComponent service = BookMarkXPersistentStateComponent.getInstance();
         String projectName = project.getName();
         int currentLineNumber = b.getLine();
-        String annotateAuthor = getAnnotateAuthor(virtualFile, currentLineNumber);
+        String annotateAuthor = outsiderFile ? "" : getAnnotateAuthor(virtualFile, currentLineNumber);
         service.addBookMark(new BookmarkXItemState(projectName, path, currentLineNumber, new Date(), annotateAuthor));
     }
 
