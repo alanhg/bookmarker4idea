@@ -20,6 +20,8 @@ public class BookMarkXPersistentStateComponent implements PersistentStateCompone
 
     private ViewScopeEnum viewScope = ViewScopeEnum.GLOABL;
 
+    private boolean autoCopy = false;
+
     @Nullable
     @Override
     public BookMarkXPersistentStateComponent getState() {
@@ -64,5 +66,13 @@ public class BookMarkXPersistentStateComponent implements PersistentStateCompone
 
     public void setViewScope(ViewScopeEnum viewScope) {
         this.viewScope = viewScope;
+    }
+
+    public void setAutoCopy(boolean autoCopy) {
+        this.autoCopy = autoCopy;
+    }
+
+    public boolean isAutoCopy() {
+        return autoCopy;
     }
 }

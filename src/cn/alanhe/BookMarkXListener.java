@@ -57,16 +57,20 @@ public class BookMarkXListener implements BookmarksListener {
         }
     }
 
-    private void addBookmark(Bookmark b) throws VcsException {
-        VirtualFile virtualFile = b.getFile();
+    private void addBookmark(Bookmark bookmark) throws VcsException {
+        VirtualFile virtualFile = bookmark.getFile();
         boolean outsiderFile = OutsidersPsiFileSupport.isOutsiderFile(virtualFile);
         String path = outsiderFile ? OutsidersPsiFileSupport.getOriginalFilePath(virtualFile) : virtualFile.getPath();
         path = path.replace(Objects.requireNonNull(project.getBasePath()), "");
         BookMarkXPersistentStateComponent service = BookMarkXPersistentStateComponent.getInstance();
         String projectName = project.getName();
-        int currentLineNumber = b.getLine();
+        int currentLineNumber = bookmark.getLine();
         String annotateAuthor = outsiderFile ? "" : getAnnotateAuthor(virtualFile, currentLineNumber);
         service.addBookMark(new BookmarkXItemState(projectName, path, currentLineNumber, new Date(), annotateAuthor));
+
+        if (BookMarkXPersistentStateComponent.getInstance().isAutoCopy()) {
+            CopyBookMarkX.copyToClipboard(project);
+        }
     }
 
     private String getAnnotateAuthor(VirtualFile virtualFile, int currentLineNumber) throws VcsException {
