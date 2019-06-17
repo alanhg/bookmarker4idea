@@ -28,8 +28,8 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="cn.alanhe.BookMarkXPersistentStateComponent"/>
+        <applicationConfigurable instance="cn.alanhe.BookMarkXSettingPage"/>
     </extensions>
-
 
     <project-components>
         <!-- Add your project components here -->

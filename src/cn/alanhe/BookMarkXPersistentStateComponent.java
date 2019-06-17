@@ -61,4 +61,8 @@ public class BookMarkXPersistentStateComponent implements PersistentStateCompone
     public static BookMarkXPersistentStateComponent getInstance() {
         return ServiceManager.getService(BookMarkXPersistentStateComponent.class);
     }
+
+    public void setViewScope(ViewScopeEnum viewScope) {
+        this.viewScope = viewScope;
+    }
 }
