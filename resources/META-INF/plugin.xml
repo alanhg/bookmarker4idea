@@ -16,7 +16,7 @@
     <!-- Plugin version
          Recommended format is BRANCH.BUILD.FIX (MAJOR.MINOR.FIX)
          Displayed in the "Plugins" settings dialog and the plugin repository Web interface.  -->
-    <version>0.4.0</version>
+    <version>0.5.0</version>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
     <idea-version since-build="173.0"/>

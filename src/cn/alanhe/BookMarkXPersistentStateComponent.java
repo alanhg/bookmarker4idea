@@ -22,6 +22,8 @@ public class BookMarkXPersistentStateComponent implements PersistentStateCompone
 
     private boolean autoCopy = false;
 
+    private boolean onlyCopyToday = false;
+
     @Nullable
     @Override
     public BookMarkXPersistentStateComponent getState() {
@@ -74,5 +76,13 @@ public class BookMarkXPersistentStateComponent implements PersistentStateCompone
 
     public boolean isAutoCopy() {
         return autoCopy;
+    }
+
+    public boolean isOnlyCopyToday() {
+        return onlyCopyToday;
+    }
+
+    public void setOnlyCopyToday(boolean onlyCopyToday) {
+        this.onlyCopyToday = onlyCopyToday;
     }
 }

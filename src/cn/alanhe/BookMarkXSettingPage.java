@@ -13,6 +13,7 @@ public class BookMarkXSettingPage implements Configurable {
     private JRadioButton projectScopeBtn;
     private JRadioButton allScopeBtn;
     private JCheckBox autoCopyCheckBox;
+    private JCheckBox onlyCopyTodayCheckBox;
 
     @Nls(capitalization = Nls.Capitalization.Title)
     @Override
@@ -44,6 +45,7 @@ public class BookMarkXSettingPage implements Configurable {
             data.setViewScope(ViewScopeEnum.GLOABL);
         }
         data.setAutoCopy(autoCopyCheckBox.isSelected());
+        data.setOnlyCopyToday(onlyCopyTodayCheckBox.isSelected());
     }
 
 
@@ -55,6 +57,9 @@ public class BookMarkXSettingPage implements Configurable {
             return true;
         }
         if (autoCopyCheckBox.isSelected() != data.isAutoCopy()) {
+            return true;
+        }
+        if (onlyCopyTodayCheckBox.isSelected() != data.isOnlyCopyToday()) {
             return true;
         }
         return false;
@@ -72,6 +77,7 @@ public class BookMarkXSettingPage implements Configurable {
             allScopeBtn.setSelected(true);
         }
         autoCopyCheckBox.setSelected(data.isAutoCopy());
+        onlyCopyTodayCheckBox.setSelected(data.isOnlyCopyToday());
     }
 
 }
