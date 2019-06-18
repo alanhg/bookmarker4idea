@@ -9,7 +9,7 @@ import javax.swing.*;
 
 public class BookMarkXSettingPage implements Configurable {
 
-    private JPanel panel1;
+    private JPanel panel;
     private JRadioButton projectScopeBtn;
     private JRadioButton allScopeBtn;
     private JCheckBox autoCopyCheckBox;
@@ -24,7 +24,7 @@ public class BookMarkXSettingPage implements Configurable {
     @Nullable
     @Override
     public JComponent createComponent() {
-        return panel1;
+        return panel;
     }
 
     @Override
