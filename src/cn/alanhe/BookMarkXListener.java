@@ -68,7 +68,7 @@ public class BookMarkXListener implements BookmarksListener {
         String annotateAuthor = outsiderFile ? "" : getAnnotateAuthor(virtualFile, currentLineNumber);
         service.addBookMark(new BookmarkXItemState(projectName, path, currentLineNumber, new Date(), annotateAuthor));
 
-        if (BookMarkXPersistentStateComponent.getInstance().isAutoCopy()) {
+        if (BookMarkXPersistentStateComponent.getInstance().getSetting().isAutoCopy()) {
             CopyBookMarkX.copyToClipboard(project);
         }
     }

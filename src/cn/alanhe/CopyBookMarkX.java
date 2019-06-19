@@ -26,10 +26,10 @@ public class CopyBookMarkX extends AnAction {
         BookMarkXPersistentStateComponent service = BookMarkXPersistentStateComponent.getInstance();
         StringBuilder text = new StringBuilder();
         List<BookmarkXItemState> bookMarks = service.getBookMarks();
-        final LineSepEnum lineSep = service.getLineSep();
+        final LineSepEnum lineSep = service.getSetting().getLineSep();
         bookMarks = bookMarks.stream()
-                .filter(getBookmarkXItemStateViewScopePredicate(project, service))
-                .filter(getBookmarkXItemStateFilterTodayPredicate(service))
+                .filter(getBookmarkXItemStateViewScopePredicate(project, service.getSetting().getViewScope()))
+                .filter(getBookmarkXItemStateFilterTodayPredicate(service.getSetting().isOnlyCopyToday()))
                 .collect(Collectors.toList());
         for (BookmarkXItemState state : bookMarks) {
             if (LineSepEnum.PLAIN_TEXT.equals(lineSep)) {
@@ -42,16 +42,16 @@ public class CopyBookMarkX extends AnAction {
     }
 
     @NotNull
-    private static Predicate<BookmarkXItemState> getBookmarkXItemStateViewScopePredicate(Project project, BookMarkXPersistentStateComponent service) {
-        if (ViewScopeEnum.GLOABL.equals(service.getViewScope())) {
+    private static Predicate<BookmarkXItemState> getBookmarkXItemStateViewScopePredicate(Project project, ViewScopeEnum scopeEnum) {
+        if (ViewScopeEnum.GLOABL.equals(scopeEnum)) {
             return bookmarkXItemState -> true;
         }
         return bookmarkXItemState -> bookmarkXItemState.getProjectName().equals(Objects.requireNonNull(project).getName());
     }
 
     @NotNull
-    private static Predicate<BookmarkXItemState> getBookmarkXItemStateFilterTodayPredicate(BookMarkXPersistentStateComponent service) {
-        if (!service.isOnlyCopyToday()) {
+    private static Predicate<BookmarkXItemState> getBookmarkXItemStateFilterTodayPredicate(boolean isOnlyCopyToday) {
+        if (!isOnlyCopyToday) {
             return bookmarkXItemState -> true;
         }
         return bookmarkXItemState -> DateUtils.isSameDay(new Date(), bookmarkXItemState.getCreatedDate());

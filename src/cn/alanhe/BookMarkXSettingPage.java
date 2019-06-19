@@ -17,7 +17,7 @@ public class BookMarkXSettingPage implements Configurable {
     private JCheckBox autoCopyCheckBox;
     private JCheckBox onlyCopyTodayCheckBox;
 
-    private JRadioButton lineSephtmlRadioBtn;
+    private JRadioButton lineSepHtmlRadioBtn;
     private JRadioButton lineSepPlainTextRadioBtn;
 
     @Nls(capitalization = Nls.Capitalization.Title)
@@ -34,16 +34,16 @@ public class BookMarkXSettingPage implements Configurable {
 
     @Override
     public boolean isModified() {
-        return isModified(BookMarkXPersistentStateComponent.getInstance());
+        return isModified(BookMarkXPersistentStateComponent.getInstance().getSetting());
     }
 
     @Override
     public void apply() throws ConfigurationException {
         BookMarkXPersistentStateComponent instance = BookMarkXPersistentStateComponent.getInstance();
-        getData(instance);
+        getData(instance.getSetting());
     }
 
-    public void getData(BookMarkXPersistentStateComponent data) {
+    public void getData(BookMarkXSetting data) {
         if (projectScopeBtn.isSelected()) {
             data.setViewScope(ViewScopeEnum.PROJECT);
         } else {
@@ -53,7 +53,7 @@ public class BookMarkXSettingPage implements Configurable {
         data.setAutoCopy(autoCopyCheckBox.isSelected());
         data.setOnlyCopyToday(onlyCopyTodayCheckBox.isSelected());
 
-        if (lineSephtmlRadioBtn.isSelected()) {
+        if (lineSepHtmlRadioBtn.isSelected()) {
             data.setLineSep(LineSepEnum.HTML);
         }
         if (lineSepPlainTextRadioBtn.isSelected()) {
@@ -62,7 +62,7 @@ public class BookMarkXSettingPage implements Configurable {
     }
 
 
-    public boolean isModified(BookMarkXPersistentStateComponent data) {
+    public boolean isModified(BookMarkXSetting data) {
         if (allScopeBtn.isSelected() && !ViewScopeEnum.GLOABL.equals(data.getViewScope())) {
             return true;
         }
@@ -78,7 +78,7 @@ public class BookMarkXSettingPage implements Configurable {
             return true;
         }
 
-        if (lineSephtmlRadioBtn.isSelected() && !LineSepEnum.HTML.equals(data.getLineSep())) {
+        if (lineSepHtmlRadioBtn.isSelected() && !LineSepEnum.HTML.equals(data.getLineSep())) {
             return true;
         }
 
@@ -91,10 +91,10 @@ public class BookMarkXSettingPage implements Configurable {
 
     @Override
     public void reset() {
-        setData(BookMarkXPersistentStateComponent.getInstance());
+        setData(BookMarkXPersistentStateComponent.getInstance().getSetting());
     }
 
-    private void setData(BookMarkXPersistentStateComponent data) {
+    private void setData(BookMarkXSetting data) {
         if (ViewScopeEnum.PROJECT.equals(data.getViewScope())) {
             projectScopeBtn.setSelected(true);
         } else {
@@ -105,7 +105,7 @@ public class BookMarkXSettingPage implements Configurable {
         onlyCopyTodayCheckBox.setSelected(data.isOnlyCopyToday());
 
         if (LineSepEnum.HTML.equals(data.getLineSep())) {
-            lineSephtmlRadioBtn.setSelected(true);
+            lineSepHtmlRadioBtn.setSelected(true);
         }
 
         if (LineSepEnum.PLAIN_TEXT.equals(data.getLineSep())) {

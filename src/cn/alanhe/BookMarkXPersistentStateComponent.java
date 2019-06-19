@@ -18,13 +18,7 @@ public class BookMarkXPersistentStateComponent implements PersistentStateCompone
 
     private List<BookmarkXItemState> bookmarkXItemStates = new ArrayList<>();
 
-    private ViewScopeEnum viewScope = ViewScopeEnum.GLOABL;
-
-    private boolean autoCopy = false;
-
-    private boolean onlyCopyToday = false;
-
-    private LineSepEnum lineSep = LineSepEnum.PLAIN_TEXT;
+    private BookMarkXSetting setting = new BookMarkXSetting();
 
     @Nullable
     @Override
@@ -60,39 +54,16 @@ public class BookMarkXPersistentStateComponent implements PersistentStateCompone
         return this.bookmarkXItemStates;
     }
 
-    public ViewScopeEnum getViewScope() {
-        return this.viewScope;
-    }
 
     public static BookMarkXPersistentStateComponent getInstance() {
         return ServiceManager.getService(BookMarkXPersistentStateComponent.class);
     }
 
-    public void setViewScope(ViewScopeEnum viewScope) {
-        this.viewScope = viewScope;
+    public BookMarkXSetting getSetting() {
+        return setting;
     }
 
-    public void setAutoCopy(boolean autoCopy) {
-        this.autoCopy = autoCopy;
-    }
-
-    public boolean isAutoCopy() {
-        return autoCopy;
-    }
-
-    public boolean isOnlyCopyToday() {
-        return onlyCopyToday;
-    }
-
-    public void setOnlyCopyToday(boolean onlyCopyToday) {
-        this.onlyCopyToday = onlyCopyToday;
-    }
-
-    public LineSepEnum getLineSep() {
-        return lineSep;
-    }
-
-    public void setLineSep(LineSepEnum lineSep) {
-        this.lineSep = lineSep;
+    public void setSetting(BookMarkXSetting setting) {
+        this.setting = setting;
     }
 }
