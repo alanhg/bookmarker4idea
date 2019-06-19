@@ -10,10 +10,15 @@ import javax.swing.*;
 public class BookMarkXSettingPage implements Configurable {
 
     private JPanel panel;
+
     private JRadioButton projectScopeBtn;
     private JRadioButton allScopeBtn;
+
     private JCheckBox autoCopyCheckBox;
     private JCheckBox onlyCopyTodayCheckBox;
+
+    private JRadioButton lineSephtmlRadioBtn;
+    private JRadioButton lineSepPlainTextRadioBtn;
 
     @Nls(capitalization = Nls.Capitalization.Title)
     @Override
@@ -44,24 +49,43 @@ public class BookMarkXSettingPage implements Configurable {
         } else {
             data.setViewScope(ViewScopeEnum.GLOABL);
         }
+
         data.setAutoCopy(autoCopyCheckBox.isSelected());
         data.setOnlyCopyToday(onlyCopyTodayCheckBox.isSelected());
+
+        if (lineSephtmlRadioBtn.isSelected()) {
+            data.setLineSep(LineSepEnum.HTML);
+        }
+        if (lineSepPlainTextRadioBtn.isSelected()) {
+            data.setLineSep(LineSepEnum.PLAIN_TEXT);
+        }
     }
 
 
     public boolean isModified(BookMarkXPersistentStateComponent data) {
-        if (ViewScopeEnum.PROJECT.equals(data.getViewScope()) && allScopeBtn.isSelected()) {
+        if (allScopeBtn.isSelected() && !ViewScopeEnum.GLOABL.equals(data.getViewScope())) {
             return true;
         }
-        if (ViewScopeEnum.GLOABL.equals(data.getViewScope()) && projectScopeBtn.isSelected()) {
+        if (projectScopeBtn.isSelected() && !ViewScopeEnum.PROJECT.equals(data.getViewScope())) {
             return true;
         }
+
         if (autoCopyCheckBox.isSelected() != data.isAutoCopy()) {
             return true;
         }
+
         if (onlyCopyTodayCheckBox.isSelected() != data.isOnlyCopyToday()) {
             return true;
         }
+
+        if (lineSephtmlRadioBtn.isSelected() && !LineSepEnum.HTML.equals(data.getLineSep())) {
+            return true;
+        }
+
+        if (lineSepPlainTextRadioBtn.isSelected() && !LineSepEnum.PLAIN_TEXT.equals(data.getLineSep())) {
+            return true;
+        }
+
         return false;
     }
 
@@ -76,8 +100,17 @@ public class BookMarkXSettingPage implements Configurable {
         } else {
             allScopeBtn.setSelected(true);
         }
+
         autoCopyCheckBox.setSelected(data.isAutoCopy());
         onlyCopyTodayCheckBox.setSelected(data.isOnlyCopyToday());
+
+        if (LineSepEnum.HTML.equals(data.getLineSep())) {
+            lineSephtmlRadioBtn.setSelected(true);
+        }
+
+        if (LineSepEnum.PLAIN_TEXT.equals(data.getLineSep())) {
+            lineSepPlainTextRadioBtn.setSelected(true);
+        }
     }
 
 }

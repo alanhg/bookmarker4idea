@@ -22,16 +22,21 @@ public class CopyBookMarkX extends AnAction {
         CopyBookMarkX.copyToClipboard(project);
     }
 
-    public static void copyToClipboard(Project project) {
+    static void copyToClipboard(Project project) {
         BookMarkXPersistentStateComponent service = BookMarkXPersistentStateComponent.getInstance();
         StringBuilder text = new StringBuilder();
         List<BookmarkXItemState> bookMarks = service.getBookMarks();
+        final LineSepEnum lineSep = service.getLineSep();
         bookMarks = bookMarks.stream()
                 .filter(getBookmarkXItemStateViewScopePredicate(project, service))
                 .filter(getBookmarkXItemStateFilterTodayPredicate(service))
                 .collect(Collectors.toList());
         for (BookmarkXItemState state : bookMarks) {
-            text.append(String.format("【%s】%s,L%d @%s<br>", state.getProjectName(), state.getFilePath(), state.getLineNumber() + 1, state.getAnnotateAuthor()));
+            if (LineSepEnum.PLAIN_TEXT.equals(lineSep)) {
+                text.append(String.format("【%s】%s,L%d @%s%n", state.getProjectName(), state.getFilePath(), state.getLineNumber() + 1, state.getAnnotateAuthor()));
+                continue;
+            }
+            text.append(String.format("【%s】%s,L%d @%s%s", state.getProjectName(), state.getFilePath(), state.getLineNumber() + 1, state.getAnnotateAuthor(), lineSep.getSeq()));
         }
         CopyPasteManager.getInstance().setContents(new TextTransferable(text.toString()));
     }

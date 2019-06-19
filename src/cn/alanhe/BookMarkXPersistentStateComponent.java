@@ -24,6 +24,8 @@ public class BookMarkXPersistentStateComponent implements PersistentStateCompone
 
     private boolean onlyCopyToday = false;
 
+    private LineSepEnum lineSep = LineSepEnum.PLAIN_TEXT;
+
     @Nullable
     @Override
     public BookMarkXPersistentStateComponent getState() {
@@ -84,5 +86,13 @@ public class BookMarkXPersistentStateComponent implements PersistentStateCompone
 
     public void setOnlyCopyToday(boolean onlyCopyToday) {
         this.onlyCopyToday = onlyCopyToday;
+    }
+
+    public LineSepEnum getLineSep() {
+        return lineSep;
+    }
+
+    public void setLineSep(LineSepEnum lineSep) {
+        this.lineSep = lineSep;
     }
 }
