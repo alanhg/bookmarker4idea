@@ -1,0 +1,7 @@
+@startuml
+
+IDE -> BookMarkX: add bookmark
+
+BookMarkX->SystemClipboard: copy bookmarks
+
+@enduml
