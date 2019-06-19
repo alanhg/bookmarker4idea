@@ -62,8 +62,4 @@ public class BookMarkXPersistentStateComponent implements PersistentStateCompone
     public BookMarkXSetting getSetting() {
         return setting;
     }
-
-    public void setSetting(BookMarkXSetting setting) {
-        this.setting = setting;
-    }
 }
