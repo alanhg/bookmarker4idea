@@ -1,6 +1,6 @@
 package cn.alanhe;
 
 public enum ViewScopeEnum {
-    GLOABL,
+    GLOBAL,
     PROJECT
 }

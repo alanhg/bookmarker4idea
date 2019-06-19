@@ -2,7 +2,7 @@ package cn.alanhe;
 
 public class BookMarkXSetting {
 
-    private ViewScopeEnum viewScope = ViewScopeEnum.GLOABL;
+    private ViewScopeEnum viewScope = ViewScopeEnum.GLOBAL;
 
     private LineSepEnum lineSep = LineSepEnum.PLAIN_TEXT;
 

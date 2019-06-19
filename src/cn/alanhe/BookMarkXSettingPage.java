@@ -47,7 +47,7 @@ public class BookMarkXSettingPage implements Configurable {
         if (projectScopeBtn.isSelected()) {
             data.setViewScope(ViewScopeEnum.PROJECT);
         } else {
-            data.setViewScope(ViewScopeEnum.GLOABL);
+            data.setViewScope(ViewScopeEnum.GLOBAL);
         }
 
         data.setAutoCopy(autoCopyCheckBox.isSelected());
@@ -63,7 +63,7 @@ public class BookMarkXSettingPage implements Configurable {
 
 
     public boolean isModified(BookMarkXSetting data) {
-        if (allScopeBtn.isSelected() && !ViewScopeEnum.GLOABL.equals(data.getViewScope())) {
+        if (allScopeBtn.isSelected() && !ViewScopeEnum.GLOBAL.equals(data.getViewScope())) {
             return true;
         }
         if (projectScopeBtn.isSelected() && !ViewScopeEnum.PROJECT.equals(data.getViewScope())) {

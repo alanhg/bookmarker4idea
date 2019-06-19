@@ -43,7 +43,7 @@ public class CopyBookMarkX extends AnAction {
 
     @NotNull
     private static Predicate<BookmarkXItemState> getBookmarkXItemStateViewScopePredicate(Project project, ViewScopeEnum scopeEnum) {
-        if (ViewScopeEnum.GLOABL.equals(scopeEnum)) {
+        if (ViewScopeEnum.GLOBAL.equals(scopeEnum)) {
             return bookmarkXItemState -> true;
         }
         return bookmarkXItemState -> bookmarkXItemState.getProjectName().equals(Objects.requireNonNull(project).getName());
