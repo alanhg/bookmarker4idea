@@ -6,12 +6,8 @@ import com.intellij.ide.bookmarks.Bookmark;
 import com.intellij.ide.bookmarks.BookmarksListener;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vcs.AbstractVcs;
 import com.intellij.openapi.vcs.VcsException;
-import com.intellij.openapi.vcs.annotate.AnnotationProvider;
-import com.intellij.openapi.vcs.annotate.LineAnnotationAspect;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.vcsUtil.VcsUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
@@ -22,7 +18,7 @@ public class BookMarkXListener implements BookmarksListener {
 
     private Project project;
 
-    public BookMarkXListener(Project project) {
+    BookMarkXListener(Project project) {
         this.project = project;
     }
 
@@ -65,7 +61,7 @@ public class BookMarkXListener implements BookmarksListener {
         BookMarkXPersistentStateComponent service = BookMarkXPersistentStateComponent.getInstance();
         String projectName = project.getName();
         int currentLineNumber = bookmark.getLine();
-        String annotateAuthor = outsiderFile ? "" : getAnnotateAuthor(virtualFile, currentLineNumber);
+        String annotateAuthor = GitOperationUtil.getAnnotateAuthor(project, virtualFile, currentLineNumber, outsiderFile);
         service.addBookMark(new BookmarkXItemState(projectName, path, currentLineNumber, new Date(), annotateAuthor));
 
         if (BookMarkXPersistentStateComponent.getInstance().getSetting().isAutoCopy()) {
@@ -73,11 +69,4 @@ public class BookMarkXListener implements BookmarksListener {
         }
     }
 
-    private String getAnnotateAuthor(VirtualFile virtualFile, int currentLineNumber) throws VcsException {
-        AbstractVcs abstractVcs = VcsUtil.getVcsFor(project, virtualFile);
-        AnnotationProvider annotationProvider = Objects.requireNonNull(abstractVcs).getAnnotationProvider();
-        assert annotationProvider != null;
-        LineAnnotationAspect aspect = annotationProvider.annotate(virtualFile).getAspects()[2];
-        return aspect.getValue(currentLineNumber);
-    }
 }
