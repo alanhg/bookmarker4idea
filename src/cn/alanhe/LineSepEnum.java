@@ -8,6 +8,9 @@ public enum LineSepEnum {
     private String seq;
 
     public String getSeq() {
+        if (this.equals(PLAIN_TEXT)) {
+            return System.getProperty("line.separator");
+        }
         return seq;
     }
 
