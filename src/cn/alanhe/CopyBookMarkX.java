@@ -32,6 +32,10 @@ public class CopyBookMarkX extends AnAction {
                 .filter(getBookmarkXItemStateFilterTodayPredicate(service.getSetting().isOnlyCopyToday()))
                 .collect(Collectors.toList());
 
+        if (bookMarks.isEmpty()) {
+            return;
+        }
+
         text.append(CopyBookMarkX.getProjectNamesSummary(bookMarks, lineSep));
 
         for (BookmarkXItemState state : bookMarks) {
@@ -58,7 +62,7 @@ public class CopyBookMarkX extends AnAction {
     }
 
     private static String getProjectNamesSummary(List<BookmarkXItemState> bookMarks, LineSepEnum lineSep) {
-        String collect = "Projects: " + bookMarks.stream().map(BookmarkXItemState::getProjectName).distinct().collect(Collectors.joining(" , "));
+        String collect = "Projects: " + bookMarks.stream().map(BookmarkXItemState::getProjectName).distinct().collect(Collectors.joining(" / "));
         return collect + lineSep.getSeq() + lineSep.getSeq();
     }
 }
