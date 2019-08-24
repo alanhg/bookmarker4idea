@@ -36,13 +36,18 @@ public class CopyBookMarkX extends AnAction {
             return;
         }
 
-        text.append(CopyBookMarkX.getProjectNamesSummary(bookMarks, lineSep));
-
-        for (BookmarkXItemState state : bookMarks) {
-            text.append(String.format("【%s】%s,L%d @%s%s", state.getProjectName(), state.getFilePath(), state.getLineNumber() + 1, state.getAnnotateAuthor(), lineSep.getSeq()));
-        }
+        text.append(getProjectNamesSummary(bookMarks, lineSep));
+        text.append(getBookMarksItemsText(bookMarks, lineSep));
 
         CopyPasteManager.getInstance().setContents(new TextTransferable(text.toString()));
+    }
+
+    public static String getBookMarksItemsText(List<BookmarkXItemState> bookMarks, LineSepEnum lineSep) {
+        StringBuilder text = new StringBuilder();
+        for (BookmarkXItemState state : bookMarks) {
+            text.append(String.format("【%s】%s:%d @%s%s", state.getProjectName(), state.getFilePath(), state.getLineNumber() + 1, state.getAnnotateAuthor(), lineSep.getSeq()));
+        }
+        return text.toString();
     }
 
     @NotNull
@@ -61,7 +66,7 @@ public class CopyBookMarkX extends AnAction {
         return bookmarkXItemState -> DateUtils.isSameDay(new Date(), bookmarkXItemState.getCreatedDate());
     }
 
-    private static String getProjectNamesSummary(List<BookmarkXItemState> bookMarks, LineSepEnum lineSep) {
+    public static String getProjectNamesSummary(List<BookmarkXItemState> bookMarks, LineSepEnum lineSep) {
         String collect = "Projects: " + bookMarks.stream().map(BookmarkXItemState::getProjectName).distinct().collect(Collectors.joining(" / "));
         return collect + lineSep.getSeq() + lineSep.getSeq();
     }
