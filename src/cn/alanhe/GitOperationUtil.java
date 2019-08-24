@@ -16,10 +16,11 @@ import java.util.Objects;
 class GitOperationUtil {
 
     static String getAnnotateAuthor(Project project, VirtualFile file, int currentLineNumber, boolean outsiderFile) throws VcsException {
-        if (!outsiderFile) {
-            return GitOperationUtil.getAnnotateAuthorByProvider(project, file, currentLineNumber);
+        if (outsiderFile) {
+            return null;
         }
-        return getLatestAnnotateAuthor(project, file, currentLineNumber);
+        return GitOperationUtil.getAnnotateAuthorByProvider(project, file, currentLineNumber);
+        //        return getLatestAnnotateAuthor(project, file, currentLineNumber);
     }
 
     private static String getAnnotateAuthorByProvider(Project project, VirtualFile virtualFile, int currentLineNumber) throws VcsException {
@@ -33,8 +34,8 @@ class GitOperationUtil {
     private static String getLatestAnnotateAuthor(Project project, VirtualFile virtualFile, int currentLineNumber) {
         GitCommand command = GitCommand.BLAME;
         GitHandler gitHandler = new GitLineHandler(project, virtualFile, command);
-        System.out.println(gitHandler.getLastOutput());
-        return  gitHandler.printableCommandLine();
+
+        return gitHandler.printableCommandLine();
     }
 
 }
