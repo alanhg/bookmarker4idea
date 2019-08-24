@@ -15,12 +15,37 @@ public class CopyBookMarkXTest {
     @Test
     public void should_return_bookmarks_item_text_when_linesep_is_html() {
         List<BookmarkXItemState> bookmarks = Arrays.asList(
-                new BookmarkXItemState("bookmarkex4idea", "src/cn/alanhe/BookmarkXItemState.java", 11, new Date(), "alan")
+                new BookmarkXItemState("bookmarkex4idea",
+                        "src/cn/alanhe/BookmarkXItemState.java",
+                        11,
+                        new Date(),
+                        "alan",
+                        ""
+                )
         );
         LineSepEnum lineSep = LineSepEnum.HTML;
 
         String bookMarksItemsText = CopyBookMarkX.getBookMarksItemsText(bookmarks, lineSep);
         String expected = "【bookmarkex4idea】src/cn/alanhe/BookmarkXItemState.java:12 @alan<br>";
+
+        Assert.assertEquals(expected, bookMarksItemsText);
+    }
+
+    @Test
+    public void should_return_bookmarks_item_text_when_linesep_is_plain_text() {
+        List<BookmarkXItemState> bookmarks = Arrays.asList(
+                new BookmarkXItemState("bookmarkex4idea",
+                        "src/cn/alanhe/BookmarkXItemState.java",
+                        11,
+                        new Date(),
+                        "alan",
+                        ""
+                )
+        );
+        LineSepEnum lineSep = LineSepEnum.PLAIN_TEXT;
+
+        String bookMarksItemsText = CopyBookMarkX.getBookMarksItemsText(bookmarks, lineSep);
+        String expected = "【bookmarkex4idea】src/cn/alanhe/BookmarkXItemState.java:12 @alan\n";
 
         Assert.assertEquals(expected, bookMarksItemsText);
     }
