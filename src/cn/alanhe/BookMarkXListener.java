@@ -11,7 +11,6 @@ import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
-import java.util.Objects;
 
 public class BookMarkXListener implements BookmarksListener {
     private static Logger logger = Logger.getInstance(BookMarkXListener.class);
@@ -58,13 +57,16 @@ public class BookMarkXListener implements BookmarksListener {
         boolean isOutsiderFile = OutsidersPsiFileSupport.isOutsiderFile(virtualFile);
 
         String path = isOutsiderFile ? OutsidersPsiFileSupport.getOriginalFilePath(virtualFile) : virtualFile.getPath();
-        path = path.replace(Objects.requireNonNull(project.getBasePath()), "");
-        BookMarkXPersistentStateComponent service = BookMarkXPersistentStateComponent.getInstance();
+        if (project.getBasePath() != null && path != null) {
+            path = path.replace(path, "");
+        }
         String projectName = project.getName();
         int currentLineNumber = bookmark.getLine();
-        String annotateAuthor = GitOperationUtil.getAnnotateAuthor(project, virtualFile, currentLineNumber, isOutsiderFile);
-        service.addBookMark(new BookmarkXItemState(projectName, path, currentLineNumber, new Date(), annotateAuthor, ""));
 
+        String annotateAuthor = GitOperationUtil.getAnnotateAuthor(project, virtualFile, currentLineNumber, isOutsiderFile);
+
+        BookMarkXPersistentStateComponent service = BookMarkXPersistentStateComponent.getInstance();
+        service.addBookMark(new BookmarkXItemState(projectName, path, currentLineNumber, new Date(), annotateAuthor, ""));
         if (service.getSetting().isAutoCopy()) {
             CopyBookMarkX.copyToClipboard(project);
         }

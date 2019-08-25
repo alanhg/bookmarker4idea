@@ -10,8 +10,7 @@ import com.intellij.vcsUtil.VcsUtil;
 import git4idea.commands.GitCommand;
 import git4idea.commands.GitHandler;
 import git4idea.commands.GitLineHandler;
-
-import java.util.Objects;
+import org.apache.commons.lang.StringUtils;
 
 class GitOperationUtil {
 
@@ -19,14 +18,18 @@ class GitOperationUtil {
         if (outsiderFile) {
             return null;
         }
-        return GitOperationUtil.getAnnotateAuthorByProvider(project, file, currentLineNumber);
-        //        return getLatestAnnotateAuthor(project, file, currentLineNumber);
+        return getAnnotateAuthorByProvider(project, file, currentLineNumber);
     }
 
     private static String getAnnotateAuthorByProvider(Project project, VirtualFile virtualFile, int currentLineNumber) throws VcsException {
         AbstractVcs abstractVcs = VcsUtil.getVcsFor(project, virtualFile);
-        AnnotationProvider annotationProvider = Objects.requireNonNull(abstractVcs).getAnnotationProvider();
-        assert annotationProvider != null;
+        if (abstractVcs == null) {
+            return StringUtils.EMPTY;
+        }
+        AnnotationProvider annotationProvider = abstractVcs.getAnnotationProvider();
+        if (annotationProvider == null) {
+            return StringUtils.EMPTY;
+        }
         LineAnnotationAspect aspect = annotationProvider.annotate(virtualFile).getAspects()[2];
         return aspect.getValue(currentLineNumber);
     }
