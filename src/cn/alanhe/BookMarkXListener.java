@@ -58,7 +58,7 @@ public class BookMarkXListener implements BookmarksListener {
 
         String path = isOutsiderFile ? OutsidersPsiFileSupport.getOriginalFilePath(virtualFile) : virtualFile.getPath();
         if (project.getBasePath() != null && path != null) {
-            path = path.replace(path, "");
+            path = path.replace(project.getBasePath(), "");
         }
         String projectName = project.getName();
         int currentLineNumber = bookmark.getLine();
