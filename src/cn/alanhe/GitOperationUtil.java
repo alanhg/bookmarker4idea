@@ -5,18 +5,20 @@ import com.intellij.openapi.vcs.AbstractVcs;
 import com.intellij.openapi.vcs.VcsException;
 import com.intellij.openapi.vcs.annotate.AnnotationProvider;
 import com.intellij.openapi.vcs.annotate.LineAnnotationAspect;
+import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.vcsUtil.VcsUtil;
-import git4idea.commands.GitCommand;
-import git4idea.commands.GitHandler;
-import git4idea.commands.GitLineHandler;
 import org.apache.commons.lang.StringUtils;
 
-class GitOperationUtil {
+import java.util.Arrays;
+import java.util.Optional;
+
+public class GitOperationUtil {
 
     static String getAnnotateAuthor(Project project, VirtualFile file, int currentLineNumber, boolean outsiderFile) throws VcsException {
         if (outsiderFile) {
-            return null;
+            VirtualFile fileByPath = LocalFileSystem.getInstance().findFileByPath(getFilePath(file.getUserDataString()));
+            return getAnnotateAuthorByProvider(project, fileByPath, currentLineNumber);
         }
         return getAnnotateAuthorByProvider(project, file, currentLineNumber);
     }
@@ -34,11 +36,12 @@ class GitOperationUtil {
         return aspect.getValue(currentLineNumber);
     }
 
-    private static String getLatestAnnotateAuthor(Project project, VirtualFile virtualFile, int currentLineNumber) {
-        GitCommand command = GitCommand.BLAME;
-        GitHandler gitHandler = new GitLineHandler(project, virtualFile, command);
-
-        return gitHandler.printableCommandLine();
+    public static String getFilePath(String userData) {
+        userData = userData.substring(1, userData.length() - 1);
+        Optional<String> first = Arrays.stream(userData.split(",")).filter((String item) -> {
+            String[] strings = item.split("->");
+            return strings[0].trim().equals("OutsidersPsiFileSupport.FilePath");
+        }).findFirst();
+        return first.map(s -> s.split("->")[1].trim()).orElse(StringUtils.EMPTY);
     }
-
 }
