@@ -1,4 +1,7 @@
-package cn.alanhe;
+package cn.alanhe.settings;
+
+import cn.alanhe.LineSepEnum;
+import cn.alanhe.ViewScopeEnum;
 
 public class BookMarkXSetting {
 

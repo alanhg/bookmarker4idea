@@ -1,6 +1,7 @@
 package cn.alanhe;
 
 
+import cn.alanhe.settings.BookMarkXSetting;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
@@ -13,12 +14,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@State(name = "cn.alanhe.BookMarkXPersistentStateComponent", storages = {@Storage("bookmarker-setting.xml")})
+@State(
+        name = "cn.alanhe.BookMarkXPersistentStateComponent",
+        storages = {@Storage("bookmarker-setting.xml")}
+)
 public class BookMarkXPersistentStateComponent implements PersistentStateComponent<BookMarkXPersistentStateComponent> {
 
     private List<BookmarkXItemState> bookmarkXItemStates = new ArrayList<>();
 
     private BookMarkXSetting setting = new BookMarkXSetting();
+
+    public static BookMarkXPersistentStateComponent getInstance() {
+        return ServiceManager.getService(BookMarkXPersistentStateComponent.class);
+    }
 
     @Nullable
     @Override
@@ -29,7 +37,17 @@ public class BookMarkXPersistentStateComponent implements PersistentStateCompone
     @Override
     public void loadState(@NotNull BookMarkXPersistentStateComponent state) {
         XmlSerializerUtil.copyBean(state, this);
+        applyState();
     }
+
+    public void applyState() {
+        applyBookMarkOptions();
+    }
+
+    public void applyBookMarkOptions() {
+
+    }
+
 
     @Override
     public void noStateLoaded() {
@@ -55,11 +73,7 @@ public class BookMarkXPersistentStateComponent implements PersistentStateCompone
     }
 
 
-    public static BookMarkXPersistentStateComponent getInstance() {
-        return ServiceManager.getService(BookMarkXPersistentStateComponent.class);
-    }
-
     public BookMarkXSetting getSetting() {
-        return setting;
+        return this.setting;
     }
 }

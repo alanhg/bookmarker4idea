@@ -1,5 +1,8 @@
-package cn.alanhe;
+package cn.alanhe.settings;
 
+import cn.alanhe.BookMarkXPersistentStateComponent;
+import cn.alanhe.LineSepEnum;
+import cn.alanhe.ViewScopeEnum;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import org.jetbrains.annotations.Nls;
@@ -41,6 +44,12 @@ public class BookMarkXSettingPage implements Configurable {
     public void apply() throws ConfigurationException {
         BookMarkXPersistentStateComponent instance = BookMarkXPersistentStateComponent.getInstance();
         getData(instance.getSetting());
+        instance.applyState();
+    }
+
+    @Override
+    public void reset() {
+        setData(BookMarkXPersistentStateComponent.getInstance().getSetting());
     }
 
     public void getData(BookMarkXSetting data) {
@@ -61,6 +70,25 @@ public class BookMarkXSettingPage implements Configurable {
         }
     }
 
+
+    private void setData(BookMarkXSetting data) {
+        if (ViewScopeEnum.PROJECT.equals(data.getViewScope())) {
+            projectScopeBtn.setSelected(true);
+        } else {
+            allScopeBtn.setSelected(true);
+        }
+
+        autoCopyCheckBox.setSelected(data.isAutoCopy());
+        onlyCopyTodayCheckBox.setSelected(data.isOnlyCopyToday());
+
+        if (LineSepEnum.HTML.equals(data.getLineSep())) {
+            lineSepHtmlRadioBtn.setSelected(true);
+        }
+
+        if (LineSepEnum.PLAIN_TEXT.equals(data.getLineSep())) {
+            lineSepPlainTextRadioBtn.setSelected(true);
+        }
+    }
 
     public boolean isModified(BookMarkXSetting data) {
         if (allScopeBtn.isSelected() && !ViewScopeEnum.GLOBAL.equals(data.getViewScope())) {
@@ -87,30 +115,6 @@ public class BookMarkXSettingPage implements Configurable {
         }
 
         return false;
-    }
-
-    @Override
-    public void reset() {
-        setData(BookMarkXPersistentStateComponent.getInstance().getSetting());
-    }
-
-    private void setData(BookMarkXSetting data) {
-        if (ViewScopeEnum.PROJECT.equals(data.getViewScope())) {
-            projectScopeBtn.setSelected(true);
-        } else {
-            allScopeBtn.setSelected(true);
-        }
-
-        autoCopyCheckBox.setSelected(data.isAutoCopy());
-        onlyCopyTodayCheckBox.setSelected(data.isOnlyCopyToday());
-
-        if (LineSepEnum.HTML.equals(data.getLineSep())) {
-            lineSepHtmlRadioBtn.setSelected(true);
-        }
-
-        if (LineSepEnum.PLAIN_TEXT.equals(data.getLineSep())) {
-            lineSepPlainTextRadioBtn.setSelected(true);
-        }
     }
 
 }
