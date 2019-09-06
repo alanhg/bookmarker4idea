@@ -44,7 +44,4 @@ public class BookMarkXSetting {
     public void setLineSep(LineSepEnum lineSep) {
         this.lineSep = lineSep;
     }
-
-    public BookMarkXSetting() {
-    }
 }
