@@ -2,6 +2,7 @@ package cn.alanhe.settings;
 
 import cn.alanhe.BookMarkXPersistentStateComponent;
 import cn.alanhe.LineSepEnum;
+import cn.alanhe.Version;
 import cn.alanhe.ViewScopeEnum;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
@@ -26,7 +27,7 @@ public class BookMarkXSettingPage implements Configurable {
     @Nls(capitalization = Nls.Capitalization.Title)
     @Override
     public String getDisplayName() {
-        return "BookMarkX";
+        return Version.PLUGIN_NAME;
     }
 
     @Nullable
