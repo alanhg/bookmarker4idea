@@ -11,7 +11,10 @@ public class BookMarkXState {
 
     private BookMarkXSetting setting = new BookMarkXSetting();
 
-    public List<BookmarkXItemState> getBookmarkXItemStates() {
+    BookMarkXState() {
+    }
+
+    List<BookmarkXItemState> getBookmarkXItemStates() {
         return bookmarkXItemStates;
     }
 

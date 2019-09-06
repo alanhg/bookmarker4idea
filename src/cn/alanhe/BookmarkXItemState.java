@@ -43,6 +43,9 @@ public class BookmarkXItemState {
         this.comment = comment;
     }
 
+    public BookmarkXItemState() {
+    }
+
     public BookmarkXItemState(String projectName, String filePath, int lineNumber, Date createdDate, String annotateAuthor, String comment) {
         this.projectName = projectName;
         this.filePath = filePath;

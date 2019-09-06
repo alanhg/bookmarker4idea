@@ -23,6 +23,9 @@ public class BookMarkXSettingPage implements Configurable {
     private JRadioButton lineSepHtmlRadioBtn;
     private JRadioButton lineSepPlainTextRadioBtn;
 
+    public BookMarkXSettingPage() {
+    }
+
     @Nls(capitalization = Nls.Capitalization.Title)
     @Override
     public String getDisplayName() {
