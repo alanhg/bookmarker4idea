@@ -6,23 +6,18 @@ import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
-import com.intellij.util.xmlb.XmlSerializerUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @State(
-        name = "cn.alanhe.BookMarkXPersistentStateComponent",
-        storages = {@Storage("bookmarker-setting.xml")}
+    name = "cn.alanhe.BookMarkXPersistentStateComponent",
+    storages = {@Storage("bookmarker-setting.xml")}
 )
-public class BookMarkXPersistentStateComponent implements PersistentStateComponent<BookMarkXPersistentStateComponent> {
+public class BookMarkXPersistentStateComponent implements PersistentStateComponent<BookMarkXState> {
 
-    private List<BookmarkXItemState> bookmarkXItemStates = new ArrayList<>();
-
-    private BookMarkXSetting setting = new BookMarkXSetting();
+    private BookMarkXState myState = new BookMarkXState();
 
     public static BookMarkXPersistentStateComponent getInstance() {
         return ServiceManager.getService(BookMarkXPersistentStateComponent.class);
@@ -30,50 +25,24 @@ public class BookMarkXPersistentStateComponent implements PersistentStateCompone
 
     @Nullable
     @Override
-    public BookMarkXPersistentStateComponent getState() {
-        return this;
+    public BookMarkXState getState() {
+        return myState;
     }
 
     @Override
-    public void loadState(@NotNull BookMarkXPersistentStateComponent state) {
-        XmlSerializerUtil.copyBean(state, this);
-        applyState();
-    }
-
-    public void applyState() {
-        applyBookMarkOptions();
-    }
-
-    public void applyBookMarkOptions() {
-
-    }
-
-
-    @Override
-    public void noStateLoaded() {
-
+    public void loadState(@NotNull BookMarkXState state) {
+        myState = state;
     }
 
     void addBookMark(BookmarkXItemState bookmarkXItemState) {
-        List<BookmarkXItemState> existBookmarks = this.bookmarkXItemStates.stream()
-                .filter(bookmarkXItemState1 ->
-                        bookmarkXItemState1.getProjectName().equals(bookmarkXItemState.getProjectName()) &&
-                                bookmarkXItemState1.getFilePath().equals(bookmarkXItemState.getFilePath()) &&
-                                bookmarkXItemState1.getLineNumber() == (bookmarkXItemState.getLineNumber()))
-                .collect(Collectors.toList());
-        if (existBookmarks.size() > 0) {
-            this.bookmarkXItemStates.remove(existBookmarks.get(0));
-            return;
-        }
-        this.bookmarkXItemStates.add(bookmarkXItemState);
+        this.myState.addBookMark(bookmarkXItemState);
     }
 
     public List<BookmarkXItemState> getBookMarks() {
-        return this.bookmarkXItemStates;
+        return this.myState.getBookmarkXItemStates();
     }
 
-
     public BookMarkXSetting getSetting() {
-        return this.setting;
+        return this.myState.getSetting();
     }
 }

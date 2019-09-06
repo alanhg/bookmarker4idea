@@ -45,7 +45,6 @@ public class BookMarkXSettingPage implements Configurable {
     public void apply() throws ConfigurationException {
         BookMarkXPersistentStateComponent instance = BookMarkXPersistentStateComponent.getInstance();
         getData(instance.getSetting());
-        instance.applyState();
     }
 
     @Override
