@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>cn.alanhe.plugin.bookmarkx4idea</id>
     <name>bookmarkx4idea</name>
-    <vendor email="i@alanhe.me" url="https://github.com/alanhg/bookmarkex4idea">personal</vendor>
+    <vendor email="i@alanhe.me" url="https://github.com/alanhg/bookmarkex4idea">Alan He</vendor>
 
     <description>
         During the period of code reviewing, the meeting host can insert a bookmark and use it to log down the path of
@@ -9,17 +9,17 @@
     </description>
 
     <change-notes>
-        - The bookmark should be made to the line of cursor with a shortcut ctrl alt B.
+        - The bookmark should be made to the line of cursor with a shortcut F3.
         - A button to copy from the history to the system's clipboard
     </change-notes>
 
     <!-- Plugin version
          Recommended format is BRANCH.BUILD.FIX (MAJOR.MINOR.FIX)
          Displayed in the "Plugins" settings dialog and the plugin repository Web interface.  -->
-    <version>0.7.0</version>
+    <version>1.0.0</version>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
-    <idea-version since-build="173.0"/>
+    <idea-version since-build="182.0"/>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
@@ -42,9 +42,8 @@
 
     <actions>
         <!-- Add your actions here -->
-        <action id="ExportBookMark" class="cn.alanhe.CopyBookMarkX" text="Copy BookMark to Clipboard"
-                icon="/icon/bookmarker.png"
-                description="Copy BookMark to Clipboard">
+        <action id="ExportBookMark" class="cn.alanhe.CopyBookMarkX" text="Copy BookMarks to Clipboard"
+                icon="/icon/bookmarker.png">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
         </action>
     </actions>
