@@ -8,3 +8,5 @@ later on by other developers.
 
 
 ## GUIDE
+
+![screenshot.gif](docs/screenshot.gif)
