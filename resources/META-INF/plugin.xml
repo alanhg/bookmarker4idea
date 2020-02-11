@@ -4,13 +4,18 @@
     <vendor email="i@alanhe.me" url="https://github.com/alanhg/bookmarkex4idea">Alan He</vendor>
 
     <description>
-        During the period of code reviewing, the meeting host can insert a bookmark and use it to log down the path of
-        that piece of code, which some further changes will be needed later on by other developers.
+        During the period of code reviewing,
     </description>
-
+    In CodeReview, I used to bookmark to record the problematic lines of code, and I want bookmarks to support customize feature, so I made this plugin to enhance bookmark.
     <change-notes>
-        - The bookmark should be made to the line of cursor with a shortcut F3.
-        - A button to copy from the history to the system's clipboard
+
+        <![CDATA[
+        <p>1.0.0</p>
+            <ul>
+              <li>copy bookmark to system clipboard</li>
+              <li>support export general setting</li>
+            </ul>
+               ]]>
     </change-notes>
 
     <!-- Plugin version
