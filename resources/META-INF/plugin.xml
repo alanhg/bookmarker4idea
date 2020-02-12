@@ -4,9 +4,10 @@
     <vendor email="i@alanhe.me" url="https://github.com/alanhg/bookmarkex4idea">Alan He</vendor>
 
     <description>
-        During the period of code reviewing,
+        <![CDATA[
+        In CodeReview, I used to bookmark to record the problematic lines of code, and I want bookmarks to support customize feature, so I made this plugin to enhance bookmark.<br>
+         ]]>
     </description>
-    In CodeReview, I used to bookmark to record the problematic lines of code, and I want bookmarks to support customize feature, so I made this plugin to enhance bookmark.
     <change-notes>
 
         <![CDATA[
