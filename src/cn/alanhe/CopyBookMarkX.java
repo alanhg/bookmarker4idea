@@ -28,9 +28,9 @@ public class CopyBookMarkX extends AnAction {
         List<BookmarkXItemState> bookMarks = service.getBookMarks();
         final LineSepEnum lineSep = service.getSetting().getLineSep();
         bookMarks = bookMarks.stream()
-                .filter(getBookmarkXItemStateViewScopePredicate(project, service.getSetting().getViewScope()))
-                .filter(getBookmarkXItemStateFilterTodayPredicate(service.getSetting().isOnlyCopyToday()))
-                .collect(Collectors.toList());
+            .filter(getBookmarkXItemStateViewScopePredicate(project, service.getSetting().getViewScope()))
+            .filter(getBookmarkXItemStateFilterTodayPredicate(service.getSetting().isOnlyCopyToday()))
+            .collect(Collectors.toList());
 
         if (bookMarks.isEmpty()) {
             return;
@@ -40,6 +40,8 @@ public class CopyBookMarkX extends AnAction {
         text.append(getBookMarksItemsText(bookMarks, lineSep));
 
         CopyPasteManager.getInstance().setContents(new TextTransferable(text.toString()));
+
+        new BookmarkXNotifier().notify(project, "Copied BookMarks to Clipboard");
     }
 
     public static String getBookMarksItemsText(List<BookmarkXItemState> bookMarks, LineSepEnum lineSep) {
