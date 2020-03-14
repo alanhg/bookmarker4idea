@@ -9,8 +9,11 @@
          ]]>
     </description>
     <change-notes>
-
         <![CDATA[
+                <p>1.1.0</p>
+            <ul>
+              <li>show notification when copied</li>
+            </ul>
         <p>1.0.0</p>
             <ul>
               <li>copy bookmark to system clipboard</li>
@@ -22,7 +25,7 @@
     <!-- Plugin version
          Recommended format is BRANCH.BUILD.FIX (MAJOR.MINOR.FIX)
          Displayed in the "Plugins" settings dialog and the plugin repository Web interface.  -->
-    <version>1.0.1</version>
+    <version>1.1.0</version>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
     <idea-version since-build="182.0"/>
